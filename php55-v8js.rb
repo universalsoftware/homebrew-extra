@@ -3,8 +3,8 @@ require File.join(File.dirname(__FILE__), '../../homebrew/homebrew-php/Abstract/
 class Php55V8js < AbstractPhp55Extension
   init
   homepage 'https://github.com/preillyme/v8js'
-  url 'https://github.com/preillyme/v8js.git', :revision => 'af58f4ec9ec1e0fa47ce4205b380ef58f5ef1bcf'
-  version '20141211'
+  url 'https://github.com/preillyme/v8js.git', :revision => 'e67f1f4c9cde651706d8474a3d43f2d437a93ca8'
+  version '20150501'
   head 'https://github.com/preillyme/v8js.git'
 
   depends_on 'v8'
