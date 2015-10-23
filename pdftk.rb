@@ -8,10 +8,9 @@ class Pdftk < Formula
 
   option "with-java", "Build gcc using --with-java instead of --with-all-languages"
 
-  # GCC 5 doesn't work (gcj hangs) / 2015-10-22
   depends_on 'ecj'
-  depends_on 'gcc49' => ['with-java'] if build.with?("java")
-  depends_on 'gcc49' => ['with-all-languages'] if !build.with?("java")
+  depends_on 'universalsoftware/extra/gcc52' => ['with-java'] if build.with?("java")
+  depends_on 'universalsoftware/extra/gcc52' => ['with-all-languages'] if !build.with?("java")
 
   def patches
     'https://raw.githubusercontent.com/docmunch/homebrew-pdftk/master/patch.diff'
@@ -26,7 +25,7 @@ class Pdftk < Formula
     man1.install 'pdftk.1'
 
     cd 'pdftk' do
-      gcc = Formula['gcc49']
+      gcc = Formula['gcc52']
       inreplace 'Makefile.OSX-10.6' do |s|
         s.gsub! '@HOMEBREW_PREFIX@', HOMEBREW_PREFIX
         s.gsub! '@PREFIX@', gcc.prefix
