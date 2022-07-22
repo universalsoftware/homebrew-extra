@@ -3,9 +3,9 @@ class Dcmtk < Formula
   homepage "http://dicom.offis.de/dcmtk.php.en"
   
   # Current snapshot used for stable now.
-  url "http://dicom.offis.de/download/dcmtk/snapshot/dcmtk-3.6.1_20150924.tar.gz"
-  sha256 "37a3cff61adaec87ff0eae553827b63cb9420c14c88d1d5b719cae7c70510e52"
-  version "3.6.1-20150924"
+  url "https://dicom.offis.de/download/dcmtk/snapshot/dcmtk-3.6.1_20170228.tar.gz"
+  sha256 "8de2f2ae70f71455288ec85c96a2579391300c7462f69a4a6398e9ec51779c11"
+  version "3.6.1-20170228"
   
   head "http://git.dcmtk.org/dcmtk.git"
 
