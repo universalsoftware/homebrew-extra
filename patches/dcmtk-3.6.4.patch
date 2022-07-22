@@ -1,0 +1,92 @@
+diff --git a/dcmdata/apps/dcm2xml.cc b/dcmdata/apps/dcm2xml.cc
+index 48d7e3c..2e59cb9 100644
+--- a/dcmdata/apps/dcm2xml.cc
++++ b/dcmdata/apps/dcm2xml.cc
+@@ -262,6 +262,9 @@ int main(int argc, char *argv[])
+         cmd.addOption("--load-short",         "-M",     "do not load very long values (default)");
+         cmd.addOption("--max-read-length",    "+R",  1, "[k]bytes: integer (4..4194302, default: 4)",
+                                                         "set threshold for long values to k kbytes");
++      cmd.addSubGroup("handling of wrong delimitation items:");
++        cmd.addOption("--use-delim-items",     "-rd",    "use delimitation items from dataset (default)");
++        cmd.addOption("--replace-wrong-delim", "+rd",    "replace wrong sequence/item delimitation items");
+     cmd.addGroup("processing options:");
+       cmd.addSubGroup("specific character set:");
+         cmd.addOption("--charset-require",    "+Cr",    "require declaration of extended charset (def.)");
+@@ -362,6 +365,17 @@ int main(int argc, char *argv[])
+             opt_loadIntoMemory = OFFalse;
+         cmd.endOptionBlock();
+ 
++        cmd.beginOptionBlock();
++        if (cmd.findOption("--use-delim-items"))
++        {
++            dcmReplaceWrongDelimitationItem.set(OFFalse);
++        }
++        if (cmd.findOption("--replace-wrong-delim"))
++        {
++            dcmReplaceWrongDelimitationItem.set(OFTrue);
++        }
++        cmd.endOptionBlock();
++
+         /* processing options */
+         cmd.beginOptionBlock();
+         if (cmd.findOption("--charset-require"))
+diff --git a/dcmdata/include/dcmtk/dcmdata/dcobject.h b/dcmdata/include/dcmtk/dcmdata/dcobject.h
+index 4dadd59..8cc6ce7 100644
+--- a/dcmdata/include/dcmtk/dcmdata/dcobject.h
++++ b/dcmdata/include/dcmtk/dcmdata/dcobject.h
+@@ -617,6 +617,9 @@ class DCMTK_DCMDATA_EXPORT DcmObject
+      *  @return current value of length field
+      */
+     Uint32 getLengthField() const { return Length; }
++    
++    Uint32 getFileOffset() const { return fOffset; }
++    void setFileOffset(Uint32 val) { fOffset = val; }
+ 
+  protected:
+ 
+@@ -785,6 +788,9 @@ class DCMTK_DCMDATA_EXPORT DcmObject
+ 
+     /// the length of this attribute as read from stream, may be undefined length
+     Uint32 Length;
++    
++    /// the element value offset in source file
++    Uint32 fOffset;
+ 
+     /// transfer state during read and write operations
+     E_TransferState fTransferState;
+diff --git a/dcmdata/libsrc/dcelem.cc b/dcmdata/libsrc/dcelem.cc
+index b8d1272..4931687 100644
+--- a/dcmdata/libsrc/dcelem.cc
++++ b/dcmdata/libsrc/dcelem.cc
+@@ -1123,6 +1123,9 @@ OFCondition DcmElement::read(DcmInputStream &inStream,
+         errorFlag = EC_IllegalCall;
+     else
+     {
++        if (getTransferState() == ERW_init)
++            setFileOffset(inStream.tell());
++
+         /* if this is not an illegal call, go ahead and create a DcmXfer */
+         /* object based on the transfer syntax which was passed */
+         DcmXfer inXfer(ixfer);
+@@ -1540,6 +1543,8 @@ void DcmElement::writeXMLStartTag(STD_NAMESPACE ostream &out,
+         out << " vm=\"" << getVM() << "\"";
+         /* value length in bytes = 0..max */
+         out << " len=\"" << getLengthField() << "\"";
++        /* offset in bytes from beginning of file */
++        out << " offset=\"" << getFileOffset() << "\"";
+         /* tag name (if known and not suppressed) */
+         if (!(flags & DCMTypes::XF_omitDataElementName))
+             out << " name=\"" << OFStandard::convertToMarkupString(getTagName(), xmlString) << "\"";
+diff --git a/dcmdata/libsrc/dcpxitem.cc b/dcmdata/libsrc/dcpxitem.cc
+index b823ffa..ef3ca28 100644
+--- a/dcmdata/libsrc/dcpxitem.cc
++++ b/dcmdata/libsrc/dcpxitem.cc
+@@ -248,6 +248,8 @@ OFCondition DcmPixelItem::writeXML(STD_NAMESPACE ostream&out,
+         out << "<pixel-item";
+         /* value length in bytes = 0..max */
+         out << " len=\"" << getLengthField() << "\"";
++        /* offset in bytes from beginning of file */
++        out << " offset=\"" << getFileOffset() << "\"";
+         /* value loaded = no (or absent)*/
+         if (!valueLoaded())
+             out << " loaded=\"no\"";

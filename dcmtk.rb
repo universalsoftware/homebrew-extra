@@ -3,9 +3,9 @@ class Dcmtk < Formula
   homepage "http://dicom.offis.de/dcmtk.php.en"
   
   # Current snapshot used for stable now.
-  url "https://dicom.offis.de/download/dcmtk/snapshot/dcmtk-3.6.1_20170228.tar.gz"
+  url "https://github.com/DCMTK/dcmtk/archive/DCMTK-3.6.5+_20191213.tar.gz"
   sha256 "8de2f2ae70f71455288ec85c96a2579391300c7462f69a4a6398e9ec51779c11"
-  version "3.6.1-20170228"
+  version "3.6.5-20191213"
   
   head "http://git.dcmtk.org/dcmtk.git"
 
@@ -21,13 +21,8 @@ class Dcmtk < Formula
   depends_on "homebrew/dupes/libiconv" => :optional
 
   patch do
-    url "file://" + File.dirname(__FILE__) + "/patches/dcmtk-3.6.1-dcm2xml-offsets.patch"
-    sha256 "535264fb3b579ba6532b36bc78bddd26bd228d4dc1b43f598bd541161d8d7833"
-  end
-
-  patch do
-    url "file://" + File.dirname(__FILE__) + "/patches/dcmtk-3.6.1-dcm2xml-rd.patch"
-    sha256 "b8ba78e78acdf938e40f3ab1718647dc7a388560857a39282aae47d18b03eab8"
+    url "file://" + File.dirname(__FILE__) + "/patches/dcmtk-3.6.4.patch"
+    sha256 "0a1b2fbf6396e170d58cfd81c81f6a631f68b8bb5ee5f5534cbda740b65f1b60"
   end
 
   def install
