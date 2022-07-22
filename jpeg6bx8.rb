@@ -9,8 +9,8 @@ class Jpeg6bx8 < Formula
   depends_on 'libtool' => :build
 
   patch do
-    url 'ftp://ftp.graphicsmagick.org/pub/GraphicsMagick/delegates/ljpeg-6b.tar.gz'
-    sha1 'ecc9b8c870c1a7de36b1b7021ee8c7396fa732c3'
+    url 'https://distfiles.emsow.com/distfiles/ljpeg-6b.tar.gz'
+    sha256 'aa48801c3c63577c091bbf6de72569fe011e5a08939870d024b40af211310cda'
   end
 
   def install
