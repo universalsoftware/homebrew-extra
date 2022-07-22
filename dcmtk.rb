@@ -24,6 +24,11 @@ class Dcmtk < Formula
     url "file://" + File.dirname(__FILE__) + "/patches/dcmtk-3.6.4.patch"
     sha256 "0a1b2fbf6396e170d58cfd81c81f6a631f68b8bb5ee5f5534cbda740b65f1b60"
   end
+  
+  patch do
+    url "file://" + File.dirname(__FILE__) + "/patches/dcmtk-m1.patch"
+    sha256 533cfe46414f6c76dcdf56fd9633a399f813707a0cb8fe2630126cbd747134c8
+  end
 
   def install
 #    ENV.m64 if MacOS.prefer_64_bit?

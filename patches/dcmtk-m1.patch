@@ -1,0 +1,44 @@
+From 5fba853b6f7c13b02bed28bd9f7d3f450e4c72bb Mon Sep 17 00:00:00 2001
+From: Michael Onken <onken@open-connections.de>
+Date: Thu, 25 Mar 2021 13:11:53 +0100
+Subject: [PATCH] Fixed building for Apple M1.
+
+Thanks to github user "Staars" for the report and patch.
+---
+ config/tests/arith.cc | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/config/tests/arith.cc b/config/tests/arith.cc
+index ccddf0d..dd58bc9 100644
+--- a/config/tests/arith.cc
++++ b/config/tests/arith.cc
+@@ -36,7 +36,7 @@
+ #include <ieeefp.h>
+ #endif
+ 
+-#ifdef __APPLE__
++#if defined(__APPLE__) && !defined(__aarch64__)
+ // For controlling floating point exceptions on OS X.
+ #include <xmmintrin.h>
+ #endif
+@@ -336,7 +336,7 @@ static void provoke_snan()
+ #ifdef HAVE_WINDOWS_H
+     _clearfp();
+     _controlfp( _controlfp(0,0) & ~_EM_INVALID, _MCW_EM );
+-#elif defined(__APPLE__)
++#elif defined(__APPLE__) && !defined(__aarch64__)
+     _MM_SET_EXCEPTION_MASK( _MM_GET_EXCEPTION_MASK() & ~_MM_MASK_INVALID );
+ #elif defined(HAVE_FENV_H) && defined(HAVE_PROTOTYPE_FEENABLEEXCEPT)
+     feenableexcept( FE_INVALID );
+@@ -378,7 +378,7 @@ static int test_snan( STD_NAMESPACE ostream& out, const char* name )
+     _controlfp( _controlfp(0,0) | _EM_INVALID, _MCW_EM );
+ #elif defined(HAVE_FENV_H)
+     feclearexcept( FE_INVALID );
+-#ifdef __APPLE__
++#if defined(__APPLE__) && !defined(__aarch64__)
+     _MM_SET_EXCEPTION_MASK( _MM_GET_EXCEPTION_MASK() | _MM_MASK_INVALID );
+ #elif defined(HAVE_FENV_H) && defined(HAVE_PROTOTYPE_FEENABLEEXCEPT)
+     fedisableexcept( FE_INVALID );
+-- 
+2.1.4
+
