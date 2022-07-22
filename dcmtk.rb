@@ -27,7 +27,7 @@ class Dcmtk < Formula
   
   patch do
     url "file://" + File.dirname(__FILE__) + "/patches/dcmtk-m1.patch"
-    sha256 533cfe46414f6c76dcdf56fd9633a399f813707a0cb8fe2630126cbd747134c8
+    sha256 "533cfe46414f6c76dcdf56fd9633a399f813707a0cb8fe2630126cbd747134c8"
   end
 
   def install
