@@ -3,7 +3,7 @@ require 'formula'
 class Jpeg6bx16 < Formula
   homepage 'http://www.ijg.org'
   url 'http://www.ijg.org/files/jpegsrc.v6b.tar.gz'
-  sha1 '7079f0d6c42fad0cfba382cf6ad322add1ace8f9'
+  sha256 '75c3ec241e9996504fe02a9ed4d12f16b74ade713972f3db9e65ce95cd27e35d'
   version '6bx16'
 
   depends_on 'libtool' => :build
