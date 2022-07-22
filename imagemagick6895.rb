@@ -25,7 +25,7 @@ class Imagemagick6895 < Formula
   depends_on "libpng" => :recommended
   depends_on "freetype" => :recommended
 
-  depends_on :x11 => :optional
+#  depends_on :x11 => :optional
   depends_on "fontconfig" => :optional
   depends_on "libtiff" => :optional
   depends_on "little-cms" => :optional
