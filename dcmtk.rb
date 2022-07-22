@@ -22,12 +22,12 @@ class Dcmtk < Formula
 
   patch do
     url "file://" + File.dirname(__FILE__) + "/patches/dcmtk-3.6.1-dcm2xml-offsets.patch"
-    sha1 "72dfe84a46fa98d2069d48266744c4d908cb0037"
+    sha256 "535264fb3b579ba6532b36bc78bddd26bd228d4dc1b43f598bd541161d8d7833"
   end
 
   patch do
     url "file://" + File.dirname(__FILE__) + "/patches/dcmtk-3.6.1-dcm2xml-rd.patch"
-    sha1 "2a934a6c99d9ac985f2a72cb1a47d736439c3ab8"
+    sha256 "b8ba78e78acdf938e40f3ab1718647dc7a388560857a39282aae47d18b03eab8"
   end
 
   def install
