@@ -21,11 +21,6 @@ class Dcmtk < Formula
     regex(/href=.*?dcmtk[._-]v?(\d+(?:\.\d+)+)\.t/i)
   end
   
-  patch do
-    url "file://" + File.dirname(__FILE__) + "/patches/dcmtk-3.6.4.patch"
-    sha256 "0a1b2fbf6396e170d58cfd81c81f6a631f68b8bb5ee5f5534cbda740b65f1b60"
-  end
-
   bottle do
     rebuild 1
     sha256 arm64_monterey: "2b707106032247e1d1832e918ec0e560b2e81af4ed0a1ee659f0803c4c172141"
@@ -40,6 +35,11 @@ class Dcmtk < Formula
   depends_on "libpng"
   depends_on "libtiff"
   depends_on "openssl@1.1"
+  
+  patch do
+    url "file://" + File.dirname(__FILE__) + "/patches/dcmtk-3.6.4.patch"
+    sha256 "0a1b2fbf6396e170d58cfd81c81f6a631f68b8bb5ee5f5534cbda740b65f1b60"
+  end
 
   uses_from_macos "libxml2"
 
