@@ -26,7 +26,7 @@ class Dcmtk < Formula
   end
 
   def install
-    ENV.m64 if MacOS.prefer_64_bit?
+#    ENV.m64 if MacOS.prefer_64_bit?
 
     args = std_cmake_args
     args << "-DDCMTK_WITH_DOXYGEN=YES" if build.with? "docs"
