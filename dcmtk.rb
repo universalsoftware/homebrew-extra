@@ -4,7 +4,7 @@ class Dcmtk < Formula
   
   # Current snapshot used for stable now.
   url "https://github.com/DCMTK/dcmtk/archive/DCMTK-3.6.5+_20191213.tar.gz"
-  sha256 "8de2f2ae70f71455288ec85c96a2579391300c7462f69a4a6398e9ec51779c11"
+  sha256 "53a51f176dd0792d54613979d79b399a38f2dfde3266dc7f1cf05bb216188697"
   version "3.6.5-20191213"
   
   head "http://git.dcmtk.org/dcmtk.git"
