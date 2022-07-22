@@ -1,4 +1,4 @@
-class Dcmtk < Formula
+class DcmtkEmsow < Formula
   desc "OFFIS DICOM toolkit command-line utilities"
   homepage "https://dicom.offis.de/dcmtk.php.en"
   head "https://git.dcmtk.org/dcmtk.git", branch: "master"
