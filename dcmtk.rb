@@ -20,10 +20,10 @@ class Dcmtk < Formula
   depends_on "openssl"
   depends_on "libiconv" => :optional
   
-  patch do
-    url "file://" + File.dirname(__FILE__) + "/patches/dcmtk-m1.patch"
-    sha256 "533cfe46414f6c76dcdf56fd9633a399f813707a0cb8fe2630126cbd747134c8"
-  end
+  #patch do
+  #  url "file://" + File.dirname(__FILE__) + "/patches/dcmtk-m1.patch"
+  #  sha256 "533cfe46414f6c76dcdf56fd9633a399f813707a0cb8fe2630126cbd747134c8"
+  #end
 
   def install
 #    ENV.m64 if MacOS.prefer_64_bit?
