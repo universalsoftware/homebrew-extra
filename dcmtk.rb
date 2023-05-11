@@ -18,7 +18,7 @@ class Dcmtk < Formula
   depends_on "libpng"
   depends_on "libtiff"
   depends_on "openssl"
-  depends_on "homebrew/dupes/libiconv" => :optional
+  depends_on "libiconv" => :optional
   
   patch do
     url "file://" + File.dirname(__FILE__) + "/patches/dcmtk-m1.patch"
