@@ -3,11 +3,11 @@ class Dcmtk < Formula
   homepage "http://dicom.offis.de/dcmtk.php.en"
   
   # Current snapshot used for stable now.
-  url "https://github.com/DCMTK/dcmtk/archive/DCMTK-3.6.5+_20191213.tar.gz"
-  sha256 "53a51f176dd0792d54613979d79b399a38f2dfde3266dc7f1cf05bb216188697"
-  version "3.6.5-20191213"
+  url "https://github.com/universalsoftware/dcmtk/archive/refs/tags/DCMTK-3.6.7-EMSOW.tar.gz"
+  sha256 "352828f4433f37f4956a26ecb0ef4e2b8a2d0caaf7ea7dbedaa9c28eadc4400f"
+  version "3.6.7"
   
-  head "http://git.dcmtk.org/dcmtk.git"
+  head "https://github.com/universalsoftware/dcmtk.git"
 
   option "with-docs", "Install development libraries/headers and HTML docs"
   option "with-openssl", "Configure DCMTK with support for OpenSSL"
@@ -19,11 +19,6 @@ class Dcmtk < Formula
   depends_on "libtiff"
   depends_on "openssl"
   depends_on "homebrew/dupes/libiconv" => :optional
-
-  patch do
-    url "file://" + File.dirname(__FILE__) + "/patches/dcmtk-3.6.4.patch"
-    sha256 "0a1b2fbf6396e170d58cfd81c81f6a631f68b8bb5ee5f5534cbda740b65f1b60"
-  end
   
   patch do
     url "file://" + File.dirname(__FILE__) + "/patches/dcmtk-m1.patch"
